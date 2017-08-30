@@ -6,11 +6,21 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongo = require('mongodb')
+var mongoose = require('mongoose')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var coins = require('./routes/coins');
 
 var app = express();
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://localhost:27017/IBNChallenge', {
+  useMongoClient : true
+}).then(function(){
+  console.log("Database Connected");
+})
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/coins', coins)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
