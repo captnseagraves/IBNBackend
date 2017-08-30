@@ -2,17 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let krakenSchema = new Schema({
-  coin: {
-    type: String,
-    required: true
-  },
-  done: {
-    type: Boolean,
-    default: true
-  }
-})
-
-let krakenSchema = new Schema({
   pair_name: String,
   ask: {
     price: String,
@@ -48,15 +37,30 @@ let krakenSchema = new Schema({
 })
 
 let poloniexSchema = new Schema({
-  coin: {
-    type: String,
-    required: true
-  },
-  done: {
-    type: Boolean,
-    default: true
-  }
+  pair_name: String,
+  baseVolume: String,
+  high24Hr: String,
+  highestBid: String,
+  lastTradePrice: String,
+  low24Hr: String,
+  lowestAsk: String,
+  percentChange: String,
+  quoteVolume: String
+})
+
+let CoinCapSchema = new Schema({
+  coin: String,
+  market_cap: Number,
+  price_usd: Number,
+  price_btc: Number,
+  supply: Number,
+  total_cap: Number,
+  volume: Number
 })
 
 
-module.exports = mongoose.model('Kraken', krakenSchema);
+module.exports = {
+  mongoose.model('Kraken', krakenSchema),
+  mongoose.model('Poloniex', poloniexSchema),
+  mongoose.model('CoinCap', CoinCapSchema)
+}
