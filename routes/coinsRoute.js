@@ -4,7 +4,8 @@ var fetchUrl = require("fetch").fetchUrl;
 var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 
-const Kraken = require('../models/kraken')
+let coins = require('../models/coinsModel')
+let Kraken = coins.CoinCap
 
 router.get('/kraken2', function(req, res){
   Kraken.find({}).then(function(results){

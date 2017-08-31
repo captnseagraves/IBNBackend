@@ -50,17 +50,19 @@ let poloniexSchema = new Schema({
 
 let CoinCapSchema = new Schema({
   coin: String,
+  coin_id: String,
   market_cap: Number,
   price_usd: Number,
   price_btc: Number,
   supply: Number,
   total_cap: Number,
-  volume: Number
+  volume: Number,
+  timestamps: Date
 })
 
 
 module.exports = {
-  mongoose.model('Kraken', krakenSchema),
-  mongoose.model('Poloniex', poloniexSchema),
-  mongoose.model('CoinCap', CoinCapSchema)
+  Kraken: mongoose.model('Kraken', krakenSchema),
+  Poloniex: mongoose.model('Poloniex', poloniexSchema),
+  CoinCap: mongoose.model('CoinCap', CoinCapSchema)
 }

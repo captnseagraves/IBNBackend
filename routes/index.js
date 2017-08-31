@@ -6,11 +6,11 @@ var mongodb = require('mongodb')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('here')
-    // fetchUrl('https://www.coincap.io/page/BTC', function(error, meta, body){
-    //   res.send(body.toString())
-    //   console.log(body.toString())
-    // })
+  // res.send('here')
+    fetchUrl('https://www.coincap.io/page/BTC', function(error, meta, body){
+      res.send(body.toString())
+      console.log(body.toString())
+    })
 });
 
 router.get('/test', function(req, res, next) {

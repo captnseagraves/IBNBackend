@@ -9,8 +9,7 @@ var mongo = require('mongodb')
 var mongoose = require('mongoose')
 
 var index = require('./routes/index');
-var users = require('./routes/users');
-var coins = require('./routes/coins');
+var coins = require('./routes/coinsRoute');
 
 var app = express();
 
@@ -31,7 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/coins', coins)
 
 // catch 404 and forward to error handler
