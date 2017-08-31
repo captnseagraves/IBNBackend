@@ -37,6 +37,7 @@ let krakenSchema = new Schema({
 })
 
 let poloniexSchema = new Schema({
+  coin: String,
   pair_name: String,
   baseVolume: String,
   high24Hr: String,
@@ -45,7 +46,8 @@ let poloniexSchema = new Schema({
   low24Hr: String,
   lowestAsk: String,
   percentChange: String,
-  quoteVolume: String
+  quoteVolume: String,
+  timestamps: Date
 })
 
 let CoinCapSchema = new Schema({
