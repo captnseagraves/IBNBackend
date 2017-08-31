@@ -85,80 +85,124 @@ mongoose.connect('mongodb://localhost:27017/IBNChallenge', {
 //   })
 // })
 
-fetchUrl('https://poloniex.com/public?command=returnTicker', function(error, meta, result){
+// fetchUrl('https://poloniex.com/public?command=returnTicker', function(error, meta, result){
+//   let json = JSON.parse(result)
+//   let LTC = json.BTC_LTC
+//
+//   let newLTC = new Poloniex({
+//     coin: "LTC",
+//     pair_name: "BTC_LTC",
+//     baseVolume: LTC.baseVolume,
+//     high24Hr: LTC.high24Hr,
+//     highestBid: LTC.highestBid,
+//     lastTradePrice: LTC.last,
+//     low24Hr: LTC.low24Hr,
+//     lowestAsk: LTC.lowestAsk,
+//     percentChange: LTC.percentChange,
+//     quoteVolume: LTC.quoteVolume,
+//     timestamps: Date.now()
+//   })
+//
+//   newLTC.save().then(function(result){
+//     console.log('Successful New Poloniex.', result);
+//   }).catch(function(err){
+//     console.log('Error. Poloniex Not Created.', err);
+//   })
+//
+//
+//   let ETH = json.BTC_ETH
+//
+//   let newETH = new Poloniex({
+//     coin: "ETH",
+//     pair_name: "BTC_ETH",
+//     baseVolume: ETH.baseVolume,
+//     high24Hr: ETH.high24Hr,
+//     highestBid: ETH.highestBid,
+//     lastTradePrice: ETH.last,
+//     low24Hr: ETH.low24Hr,
+//     lowestAsk: ETH.lowestAsk,
+//     percentChange: ETH.percentChange,
+//     quoteVolume: ETH.quoteVolume,
+//     timestamps: Date.now()
+//   })
+//
+//   newETH.save().then(function(result){
+//     console.log('Successful New Poloniex.', result);
+//   }).catch(function(err){
+//     console.log('Error. Poloniex Not Created.', err);
+//   })
+//
+//
+//   let DASH = json.BTC_DASH
+//
+//   let newDASH = new Poloniex({
+//     coin: "DASH",
+//     pair_name: "BTC_DASH",
+//     baseVolume: DASH.baseVolume,
+//     high24Hr: DASH.high24Hr,
+//     highestBid: DASH.highestBid,
+//     lastTradePrice: DASH.last,
+//     low24Hr: DASH.low24Hr,
+//     lowestAsk: DASH.lowestAsk,
+//     percentChange: DASH.percentChange,
+//     quoteVolume: DASH.quoteVolume,
+//     timestamps: Date.now()
+//   })
+//
+//
+//   newDASH.save().then(function(result){
+//     console.log('Successful New Poloniex.', result);
+//   }).catch(function(err){
+//     console.log('Error. Poloniex Not Created.', err);
+//   })
+// })
+
+fetchUrl('https://api.kraken.com/0/public/Ticker?pair=ETHXBT', function(error, meta, result){
   let json = JSON.parse(result)
-  let LTC = json.BTC_LTC
 
-  let newPoloniex = new Poloniex({
-    coin: "LTC",
-    pair_name: "BTC_LTC",
-    baseVolume: LTC.baseVolume,
-    high24Hr: LTC.high24Hr,
-    highestBid: LTC.highestBid,
-    lastTradePrice: LTC.last,
-    low24Hr: LTC.low24Hr,
-    lowestAsk: LTC.lowestAsk,
-    percentChange: LTC.percentChange,
-    quoteVolume: LTC.quoteVolume,
-    timestamps: Date.now()
-  })
+  let ETH = json.result.XETHXXBT
 
+  console.log(ETH);
 
-  newPoloniex.save().then(function(result){
-    console.log('Successful New Poloniex.', result);
-  }).catch(function(err){
-    console.log('Error. Poloniex Not Created.', err);
-  })
-})
-
-fetchUrl('https://poloniex.com/public?command=returnTicker', function(error, meta, result){
-  let json = JSON.parse(result)
-  let ETH = json.BTC_ETH
-
-  let newPoloniex = new Poloniex({
-    coin: "ETH",
+  let newKraken = new Kraken({
     pair_name: "BTC_ETH",
-    baseVolume: ETH.baseVolume,
-    high24Hr: ETH.high24Hr,
-    highestBid: ETH.highestBid,
-    lastTradePrice: ETH.last,
-    low24Hr: ETH.low24Hr,
-    lowestAsk: ETH.lowestAsk,
-    percentChange: ETH.percentChange,
-    quoteVolume: ETH.quoteVolume,
+    ask: {
+      price: ETH.a[0],
+      wholeLotVolume: ETH.a[1],
+      lotVolume: ETH.a[2]
+    },
+    bid: {
+      price: ETH.b[0],
+      wholeLotVolume: ETH.b[1],
+      lotVolume: ETH.b[2]
+    },
+    lastTradeClosed: {
+      price: ETH.c[0],
+      lotVolume: ETH.c[1]
+    },
+    volume: {
+      today: ETH.v[0],
+      last24: ETH.v[1]
+    },
+    numberOfTrades: {
+      today: ETH.t[0],
+      last24: ETH.t[1]
+    },
+    lowPrice: {
+      today: ETH.l[0],
+      last24: ETH.l[1]
+    },
+    highPrice: {
+      today: ETH.h[0],
+      last24: ETH.h[1]
+    },
+    todayOpeningPrice: ETH.o,
     timestamps: Date.now()
   })
 
-
-  newPoloniex.save().then(function(result){
-    console.log('Successful New Poloniex.', result);
+  newKraken.save().then(function(result){
+    console.log('Successful New Kraken.', result);
   }).catch(function(err){
-    console.log('Error. Poloniex Not Created.', err);
-  })
-})
-
-fetchUrl('https://poloniex.com/public?command=returnTicker', function(error, meta, result){
-  let json = JSON.parse(result)
-  let DASH = json.BTC_DASH
-
-  let newPoloniex = new Poloniex({
-    coin: "DASH",
-    pair_name: "BTC_DASH",
-    baseVolume: DASH.baseVolume,
-    high24Hr: DASH.high24Hr,
-    highestBid: DASH.highestBid,
-    lastTradePrice: DASH.last,
-    low24Hr: DASH.low24Hr,
-    lowestAsk: DASH.lowestAsk,
-    percentChange: DASH.percentChange,
-    quoteVolume: DASH.quoteVolume,
-    timestamps: Date.now()
-  })
-
-
-  newPoloniex.save().then(function(result){
-    console.log('Successful New Poloniex.', result);
-  }).catch(function(err){
-    console.log('Error. Poloniex Not Created.', err);
+    console.log('Error. Kraken Not Created.', err);
   })
 })

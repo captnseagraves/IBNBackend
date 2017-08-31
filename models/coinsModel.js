@@ -33,7 +33,8 @@ let krakenSchema = new Schema({
     today: String,
     last24: String
   },
-  todayOpeningPrice: String
+  todayOpeningPrice: String,
+  timestamps: Date
 })
 
 let poloniexSchema = new Schema({
