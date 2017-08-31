@@ -206,3 +206,103 @@ fetchUrl('https://api.kraken.com/0/public/Ticker?pair=ETHXBT', function(error, m
     console.log('Error. Kraken Not Created.', err);
   })
 })
+
+fetchUrl('https://api.kraken.com/0/public/Ticker?pair=LTCXBT', function(error, meta, result){
+  let json = JSON.parse(result)
+
+  let LTC = json.result.XLTCXXBT
+
+  console.log(LTC);
+
+  let newKraken = new Kraken({
+    pair_name: "BTC_LTC",
+    ask: {
+      price: LTC.a[0],
+      wholeLotVolume: LTC.a[1],
+      lotVolume: LTC.a[2]
+    },
+    bid: {
+      price: LTC.b[0],
+      wholeLotVolume: LTC.b[1],
+      lotVolume: LTC.b[2]
+    },
+    lastTradeClosed: {
+      price: LTC.c[0],
+      lotVolume: LTC.c[1]
+    },
+    volume: {
+      today: LTC.v[0],
+      last24: LTC.v[1]
+    },
+    numberOfTrades: {
+      today: LTC.t[0],
+      last24: LTC.t[1]
+    },
+    lowPrice: {
+      today: LTC.l[0],
+      last24: LTC.l[1]
+    },
+    highPrice: {
+      today: LTC.h[0],
+      last24: LTC.h[1]
+    },
+    todayOpeningPrice: LTC.o,
+    timestamps: Date.now()
+  })
+
+  newKraken.save().then(function(result){
+    console.log('Successful New Kraken.', result);
+  }).catch(function(err){
+    console.log('Error. Kraken Not Created.', err);
+  })
+})
+
+fetchUrl('https://api.kraken.com/0/public/Ticker?pair=DASHXBT', function(error, meta, result){
+  let json = JSON.parse(result)
+
+  let DASH = json.result.XDASHXXBT
+
+  console.log(DASH);
+
+  let newKraken = new Kraken({
+    pair_name: "BTC_DASH",
+    ask: {
+      price: DASH.a[0],
+      wholeLotVolume: DASH.a[1],
+      lotVolume: DASH.a[2]
+    },
+    bid: {
+      price: DASH.b[0],
+      wholeLotVolume: DASH.b[1],
+      lotVolume: DASH.b[2]
+    },
+    lastTradeClosed: {
+      price: DASH.c[0],
+      lotVolume: DASH.c[1]
+    },
+    volume: {
+      today: DASH.v[0],
+      last24: DASH.v[1]
+    },
+    numberOfTrades: {
+      today: DASH.t[0],
+      last24: DASH.t[1]
+    },
+    lowPrice: {
+      today: DASH.l[0],
+      last24: DASH.l[1]
+    },
+    highPrice: {
+      today: DASH.h[0],
+      last24: DASH.h[1]
+    },
+    todayOpeningPrice: DASH.o,
+    timestamps: Date.now()
+  })
+
+  newKraken.save().then(function(result){
+    console.log('Successful New Kraken.', result);
+  }).catch(function(err){
+    console.log('Error. Kraken Not Created.', err);
+  })
+})
