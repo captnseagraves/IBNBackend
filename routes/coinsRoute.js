@@ -5,17 +5,31 @@ var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 
 let coins = require('../models/coinsModel')
-let Kraken = coins.Kraken
-let CoinCap = coins.CoinCap
-let Poloniex = coins.Poloniex
+let kraken = coins.Kraken
+let coinCap = coins.CoinCap
+let poloniex = coins.Poloniex
 
-router.get('/kraken', function(req, res){
-  Kraken.find({}).then(function(results){
-    console.log(results);
-    res.send(results)
-  })
-  console.log('in kraken2 get');
+router.get('/', function(req, res){
 
+//Will find all resources
+
+  // Kraken.find().sort('createdAt').then(function(results){
+  //   console.log(results);
+  //   res.send(results)
+  // })
+})
+
+router.get('/:coin', function(req, res){
+
+let coin = req.params.coin
+
+console.log(req.body);
+console.log('coin', coin);
+
+  // Kraken.find({}).then(function(results){
+  //   console.log(results);
+  //   res.send(results)
+  // })
 })
 
 router.get('/poloniex', function(req, res){
@@ -23,8 +37,6 @@ router.get('/poloniex', function(req, res){
     console.log(results);
     res.send(results)
   })
-  console.log('in kraken2 get');
-
 })
 
 router.get('/coincap', function(req, res){
@@ -32,8 +44,6 @@ router.get('/coincap', function(req, res){
     console.log(results);
     res.send(results)
   })
-  console.log('in kraken2 get');
-
 })
 
 
