@@ -11,30 +11,27 @@ let Poloniex = coins.Poloniex
 
 router.get('/', function(req, res){
   console.log('listening');
-  res.send('listening')
 
-  // Kraken.find().sort('createdAt').then(function(results){
-  //   console.log(results);
-  //   res.send(results)
-  // })
-
-  // Promise.all([
-  //   Kraken.find({}).then(function(results){
-  //     console.log('kraken');
-  //     return results
-  //   }),
-  //   Poloniex.find({}).then(function(results){
-  //     console.log('poloniex');
-  //     return results
-  //   }),
-  //   CoinCap.find({}).then(function(results){
-  //     console.log('coincap');
-  //     return results
-  //   })
-  // ]).then(allResults => {
-  //   console.log('allResults');
-  //   res.send(allResults)
-  // })
+  Promise.all([
+    Kraken.find().sort('-timestamps').limit(3).then(function(results){
+      return {
+        kraken: results
+      }
+    }),
+    Poloniex.find().sort('-timestamps').limit(3).then(function(results){
+      return {
+        poloniex: results
+      }
+    }),
+    CoinCap.find().sort('-timestamps').limit(3).then(function(results){
+      return {
+        coincap: results
+      }
+    })
+  ]).then(allResults => {
+    console.log('allResults');
+    res.send(allResults)
+  })
 
 })
 

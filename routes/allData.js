@@ -10,6 +10,7 @@ let CoinCap = coins.CoinCap
 let Poloniex = coins.Poloniex
 
 router.get('/', function(req, res){
+  console.log("allData");
 
 //Will find all resources
 

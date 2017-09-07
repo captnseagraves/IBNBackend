@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', allData);
+app.use('/allData', allData);
 app.use('/latestData', latestData);
 
 // catch 404 and forward to error handler
