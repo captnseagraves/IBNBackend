@@ -8,7 +8,9 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb')
 var mongoose = require('mongoose')
 
-var coins = require('./routes/coinsRoute');
+var allData = require('./routes/allData');
+var latestData = require('./routes/latestData');
+
 
 var app = express();
 
@@ -28,7 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', coins);
+app.use('/', allData);
+app.use('/latestData', latestData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

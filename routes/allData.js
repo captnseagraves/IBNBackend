@@ -17,25 +17,44 @@ router.get('/', function(req, res){
   //   console.log(results);
   //   res.send(results)
   // })
+
+  Promise.all([
+    Kraken.find({}).then(function(results){
+      console.log('kraken');
+      return results
+    }),
+    Poloniex.find({}).then(function(results){
+      console.log('poloniex');
+      return results
+    }),
+    CoinCap.find({}).then(function(results){
+      console.log('coincap');
+      return results
+    })
+  ]).then(allResults => {
+    console.log('allResults');
+    res.send(allResults)
+  })
+
 })
 
-router.get('/:id', function(req, res){
+router.get('/:exchange', function(req, res){
 
-  let id = req.params.id
+  let exchange = req.params.exchange
 
-  if (id === '1') {
+  if (exchange === 'kraken') {
     Kraken.find({}).then(function(results){
       res.send(results)
     })
   }
 
-  if (id === '2') {
+  if (exchange === 'poloniex') {
     Poloniex.find({}).then(function(results){
       res.send(results)
     })
   }
 
-  if (id === '3') {
+  if (exchange === 'coincap') {
     CoinCap.find({}).then(function(results){
       res.send(results)
     })
