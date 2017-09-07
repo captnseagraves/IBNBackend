@@ -5,9 +5,9 @@ var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 
 let coins = require('../models/coinsModel')
-let kraken = coins.Kraken
-let coinCap = coins.CoinCap
-let poloniex = coins.Poloniex
+let Kraken = coins.Kraken
+let CoinCap = coins.CoinCap
+let Poloniex = coins.Poloniex
 
 router.get('/', function(req, res){
 
@@ -19,33 +19,29 @@ router.get('/', function(req, res){
   // })
 })
 
-router.get('/:coin', function(req, res){
+router.get('/:id', function(req, res){
 
-let coin = req.params.coin
+  let id = req.params.id
 
-console.log(req.body);
-console.log('coin', coin);
+  if (id === '1') {
+    Kraken.find({}).then(function(results){
+      res.send(results)
+    })
+  }
 
-  // Kraken.find({}).then(function(results){
-  //   console.log(results);
-  //   res.send(results)
-  // })
+  if (id === '2') {
+    Poloniex.find({}).then(function(results){
+      res.send(results)
+    })
+  }
+
+  if (id === '3') {
+    CoinCap.find({}).then(function(results){
+      res.send(results)
+    })
+  }
+
 })
-
-router.get('/poloniex', function(req, res){
-  Poloniex.find({}).then(function(results){
-    console.log(results);
-    res.send(results)
-  })
-})
-
-router.get('/coincap', function(req, res){
-  CoinCap.find({}).then(function(results){
-    console.log(results);
-    res.send(results)
-  })
-})
-
 
 // router.post('/kraken', function(req, res){
 //   console.log('here');
