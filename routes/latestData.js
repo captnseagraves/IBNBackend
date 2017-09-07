@@ -13,9 +13,9 @@ router.get('/', function(req, res){
   console.log('listening');
 
   Promise.all([
-    Kraken.find().sort('-timestamps').limit(3).then(function(results){
+    Kraken.findOne({pair_name: "BTC_LTC"}).sort('-timestamps').then(function(results){
       return {
-        kraken: results
+        kraken_LTC: results
       }
     }),
     Poloniex.find().sort('-timestamps').limit(3).then(function(results){
