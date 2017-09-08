@@ -9,23 +9,31 @@ let Kraken = coins.Kraken
 let CoinCap = coins.CoinCap
 let Poloniex = coins.Poloniex
 
+const krakenFind = () => {
+  return Kraken.find({}).then(function(results){
+    return results
+  })
+}
+
+const poloniexFind = () => {
+  return Poloniex.find({}).then(function(results){
+    return results
+  })
+}
+
+const coincapFind = () => {
+  return CoinCap.find({}).then(function(results){
+    return results
+  })
+}
+
 router.get('/', function(req, res){
 
   Promise.all([
-    Kraken.find({}).then(function(results){
-      console.log('kraken');
-      return results
-    }),
-    Poloniex.find({}).then(function(results){
-      console.log('poloniex');
-      return results
-    }),
-    CoinCap.find({}).then(function(results){
-      console.log('coincap');
-      return results
-    })
+    krakenFind(),
+    poloniexFind(),
+    coincapFind()
   ]).then(allResults => {
-    console.log('allResults');
     res.send(allResults)
   })
 
@@ -36,19 +44,19 @@ router.get('/:exchange', function(req, res){
   let exchange = req.params.exchange
 
   if (exchange === 'kraken') {
-    Kraken.find({}).then(function(results){
+    krakenFind().then(function(results){
       res.send(results)
     })
   }
 
   if (exchange === 'poloniex') {
-    Poloniex.find({}).then(function(results){
+    poloniexFind().then(function(results){
       res.send(results)
     })
   }
 
   if (exchange === 'coincap') {
-    CoinCap.find({}).then(function(results){
+    coincapFind().then(function(results){
       res.send(results)
     })
   }
