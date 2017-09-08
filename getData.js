@@ -120,9 +120,6 @@ const fetchKraken = (krakenSymbol) => {
   })
 }
 
-
-
-
 setInterval(() => {
 
   fetchCoinCap('LTC')

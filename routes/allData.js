@@ -10,14 +10,6 @@ let CoinCap = coins.CoinCap
 let Poloniex = coins.Poloniex
 
 router.get('/', function(req, res){
-  console.log("allData");
-
-//Will find all resources
-
-  // Kraken.find().sort('createdAt').then(function(results){
-  //   console.log(results);
-  //   res.send(results)
-  // })
 
   Promise.all([
     Kraken.find({}).then(function(results){
@@ -63,17 +55,5 @@ router.get('/:exchange', function(req, res){
 
 })
 
-// router.post('/kraken', function(req, res){
-//   console.log('here');
-//   let newKraken = new Kraken({coin: "testtoken", done: true})
-//
-//   newKraken.save().then(function(result){
-//     res.redirect('/kraken2')
-//     console.log(result);
-//   }).catch(function(err){
-//     console.log(err);
-//     res.redirect('/kraken2')
-//   })
-// })
 
 module.exports = router;
