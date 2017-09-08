@@ -18,14 +18,44 @@ router.get('/', function(req, res){
         kraken_LTC: results
       }
     }),
-    Poloniex.find().sort('-timestamps').limit(3).then(function(results){
+    Kraken.findOne({pair_name: "BTC_DASH"}).sort('-timestamps').then(function(results){
       return {
-        poloniex: results
+        kraken_DASH: results
       }
     }),
-    CoinCap.find().sort('-timestamps').limit(3).then(function(results){
+    Kraken.findOne({pair_name: "BTC_ETH"}).sort('-timestamps').then(function(results){
       return {
-        coincap: results
+        kraken_ETH: results
+      }
+    }),
+    Poloniex.findOne({pair_name: "BTC_LTC"}).sort('-timestamps').then(function(results){
+      return {
+        poloniex_LTC: results
+      }
+    }),
+    Poloniex.findOne({pair_name: "BTC_DASH"}).sort('-timestamps').then(function(results){
+      return {
+        poloniex_DASH: results
+      }
+    }),
+    Poloniex.findOne({pair_name: "BTC_ETH"}).sort('-timestamps').then(function(results){
+      return {
+        poloniex_ETH: results
+      }
+    }),
+    CoinCap.findOne({coin_id: "LTC"}).sort('-timestamps').then(function(results){
+      return {
+        coincap_LTC: results
+      }
+    }),
+    CoinCap.findOne({coin_id: "DASH"}).sort('-timestamps').then(function(results){
+      return {
+        coincap_DASH: results
+      }
+    }),
+    CoinCap.findOne({coin_id: "ETH"}).sort('-timestamps').then(function(results){
+      return {
+        coincap_ETH: results
       }
     })
   ]).then(allResults => {
